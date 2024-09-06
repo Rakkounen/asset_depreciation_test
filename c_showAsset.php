@@ -9,6 +9,10 @@ public $model;
 		$asset_depreciation_test = $this->model->getAllAsset();
 		Include 'v_showAsset.php';
     }
+	public function invokePrediction(){
+		$asset_depreciation_prediction_test = $this->model->getPredictedValue();
+		Include 'v_showAsset.php';
+    }
     public function addAsset($asset_id, $asset_name, $asset_price, $asset_lifetime, $asset_settle_date, $asset_value){
         $this->model = new m_showAsset();
         $assetid = $asset_id;

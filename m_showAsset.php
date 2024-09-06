@@ -34,5 +34,17 @@ class m_showAsset {
         $this->hasil[] = $rows;
         return $this->hasil;
     }
+	
+	public function getPredictedValue($month_value, $year_value){
+		$this->mysqli->query("UPDATE asset SET asset_value = asset_price - asset_price * (($month_value - MONTH(asset_settle_date)) + (12 * ($year_value -YEAR(asset_settle_date)))) / asset_lifetime");
+        $this->mysqli->query("UPDATE asset SET asset_remaining_lifetime = asset_lifetime - (($month_value - MONTH(asset_settle_date)) + (12 * ($year_value -YEAR(asset_settle_date))))");
+		$rs = $this->mysqli->query("SELECT * FROM asset");
+        $rows = array();
+        while($row = $rs->fetch_assoc()) {
+            $rows[] = $row;
+        }
+        $this->hasil[] = $rows;
+        return $this->hasil;
+	}
 }
 ?>
